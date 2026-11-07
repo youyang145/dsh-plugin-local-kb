@@ -1,7 +1,7 @@
 {
   "name": "dsh-plugin-local-kb",
-  "version": "0.15.0",
-  "description": "本地知识库插件（MVP）：kb_consult / kb_index / kb_stage；库逻辑与面板网页打包在 lib，写只写收件箱。",
+  "version": "0.15.1",
+  "description": "DeepSeek Harness 适配器：5 个工具、每轮索引注入、右下角挂件、MCP 与配对授权；库逻辑打包在 lib。",
   "type": "module",
   "main": "index.mjs",
   "engines": {
@@ -15,13 +15,15 @@
     "cordis.patch.yml",
     "README.md"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
     }
   }
 }
+
+
 
 
 
