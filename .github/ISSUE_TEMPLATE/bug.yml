@@ -1,0 +1,44 @@
+name: 功能问题
+description: 工具、面板、MCP 行为不对
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        先说清楚是哪个功能：`kb_consult` / `kb_index` / `kb_stage` / `kb_record` / `kb_recommend` / 面板 / MCP / 挂件。
+  - type: input
+    id: feature
+    attributes:
+      label: 哪个功能
+      placeholder: MCP 的 kb_consult
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望
+      description: 你以为会发生什么
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际
+      description: 实际发生了什么，有报错就贴原文
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: 复现步骤
+      description: 能重复出现的最短步骤
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: 版本
+      description: 插件版本（package.json）+ 核心版本（release tag）
+      placeholder: plugin 0.14.0 / core v0.1.0
+    validations:
+      required: true
