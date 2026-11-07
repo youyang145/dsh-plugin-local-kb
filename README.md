@@ -26,10 +26,10 @@
 
 ## 安装
 
-从 MVP 仓库安装：
+直接装这个仓库：
 
 ```powershell
-dsh plugin --profile <你的 profile> add "https://github.com/youyang145/local-experience-kb-mvp.git" --ignore-workspace-root-check
+dsh plugin --profile <你的 profile> add "https://github.com/youyang145/dsh-plugin-local-kb.git" --ignore-workspace-root-check
 ```
 
 或者本地目录：
@@ -75,3 +75,4 @@ npm pack             # files 已包含 lib/**、lib/web/**、widget.js
 - 面板仍是独立进程（7788），懒启动；
 - 自动索引只到"目录 + 召回规则"，正文仍要 `kb_consult`；
 - 主库写入只由人在面板操作，工具没有直接写主库的权限。
+
