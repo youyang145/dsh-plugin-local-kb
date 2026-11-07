@@ -2,7 +2,7 @@
 
 > **骨架（设计与规范）**：[youyang145/local-experience-kb](https://github.com/youyang145/local-experience-kb)
 > **参考实现（核心库 + 面板）**：[youyang145/local-experience-kb-mvp](https://github.com/youyang145/local-experience-kb-mvp)
-> 本目录是它的 **DeepSeek Harness 宿主适配器**：把库接进 DSH 的工具、系统提示和右下角挂件。
+> 本目录是它的 **DeepSeek Harness 宿主适配器**：把库接进 DSH 的工具、系统提示和右下角挂件。`n> 三库怎么分工与同步：[联动与同步规矩](https://github.com/youyang145/local-experience-kb/blob/main/docs/联动与同步规矩.md)。
 
 ## 它做了什么
 
