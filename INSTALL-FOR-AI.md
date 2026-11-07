@@ -39,7 +39,7 @@ dsh plugin --profile <你的 profile> add "https://github.com/youyang145/dsh-plu
   --store-dir "F:\一个可写目录\pnpm-store"
 ```
 
-`--store-dir` 不是必须，但如果报 `EPERM` 或 store 相关错误，加上它。
+`--store-dir` 不是必须，但如果报 `EPERM` 或 store 相关错误，加上它。`n`n如果从 git 安装失败（网络、代理、证书），退回本地目录：`n`n```powershell`ngit clone https://github.com/youyang145/dsh-plugin-local-kb.git`ndsh plugin --profile <你的 profile> add "<clone 下来的目录>" --ignore-workspace-root-check`n```
 
 ### 4. 检查两处
 
@@ -81,3 +81,4 @@ profile 的 `package.json`：
 
 这是 MVP：接口和字段还会变，升级前先备份知识库（面板 → 设置 → 数据与备份）。
 出问题可以提 Issue，作者高三、周末才有空，回得慢。
+
