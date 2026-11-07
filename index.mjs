@@ -10,10 +10,11 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
+import os from 'node:os'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
-const DEFAULT_HOME = 'F:\\大项目开发\\dsh插件本地知识库\\测试数据\\_test-kb-m1'
+const DEFAULT_HOME = process.env.KB_HOME || path.join(os.homedir(), 'local-experience-kb')
 const DEFAULT_CODE = path.join(here, 'lib', 'kb')
 const DEFAULT_PANEL = 'http://127.0.0.1:7788'
 

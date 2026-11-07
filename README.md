@@ -2,7 +2,7 @@
 
 > **骨架（设计与规范）**：[youyang145/local-experience-kb](https://github.com/youyang145/local-experience-kb)
 > **参考实现（核心库 + 面板）**：[youyang145/local-experience-kb-mvp](https://github.com/youyang145/local-experience-kb-mvp)
-> 本目录是它的 **DeepSeek Harness 宿主适配器**：把库接进 DSH 的工具、系统提示和右下角挂件。`n> 三库怎么分工与同步：[联动与同步规矩](https://github.com/youyang145/local-experience-kb/blob/main/docs/联动与同步规矩.md)。
+> 本目录是它的 **DeepSeek Harness 宿主适配器**：把库接进 DSH 的工具、系统提示和右下角挂件。
 
 ## 它做了什么
 
@@ -25,8 +25,6 @@
 | `kb_recommend` | 建议转正/推翻，必须带理由 | 只进「待拍板」，人决定 |
 
 ## 安装
-
-给别人的 AI 看的版本：[INSTALL-FOR-AI.md](INSTALL-FOR-AI.md)（一段可转发的话 + 排错表）。
 
 直接装这个仓库：
 
@@ -77,5 +75,4 @@ npm pack             # files 已包含 lib/**、lib/web/**、widget.js
 - 面板仍是独立进程（7788），懒启动；
 - 自动索引只到"目录 + 召回规则"，正文仍要 `kb_consult`；
 - 主库写入只由人在面板操作，工具没有直接写主库的权限。
-
 
