@@ -8,7 +8,8 @@ import os from 'node:os'
 import path from 'node:path'
 import { apply } from './index.mjs'
 
-// 默认用 ~/local-experience-kb；想跑演示数据就设 KB_HOME\nconst DEMO = process.env.KB_HOME || path.join(os.homedir(), 'local-experience-kb')
+// 默认用 ~/local-experience-kb；想跑演示数据就设 KB_HOME
+const DEMO = process.env.KB_HOME || fs.mkdtempSync(path.join(os.tmpdir(), 'kb-harness-'))
 
 function register(config) {
   const tools = []
@@ -48,4 +49,5 @@ const files = fs.readdirSync(path.join(temp, 'blocks', '待分区', 'knowledge')
   .filter((f) => String(f).endsWith('.md'))
 console.log(`临时库里待分区文件：${files.length} 个`)
 fs.rmSync(temp, { recursive: true, force: true })
+
 
