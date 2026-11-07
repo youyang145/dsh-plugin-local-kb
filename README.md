@@ -26,6 +26,8 @@
 
 ## 安装
 
+给别人的 AI 看的版本：[INSTALL-FOR-AI.md](INSTALL-FOR-AI.md)（一段可转发的话 + 排错表）。
+
 直接装这个仓库：
 
 ```powershell
@@ -75,4 +77,5 @@ npm pack             # files 已包含 lib/**、lib/web/**、widget.js
 - 面板仍是独立进程（7788），懒启动；
 - 自动索引只到"目录 + 召回规则"，正文仍要 `kb_consult`；
 - 主库写入只由人在面板操作，工具没有直接写主库的权限。
+
 
