@@ -1,0 +1,48 @@
+name: 安装问题
+description: 装不上、装完没反应、K 按钮不出现
+title: "[安装] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        先按 [INSTALL-FOR-AI.md](https://github.com/youyang145/dsh-plugin-local-kb/blob/main/INSTALL-FOR-AI.md) 走一遍。
+        还是不行的话，把下面填全；信息不全很难定位。
+  - type: input
+    id: dsh-version
+    attributes:
+      label: DSH 版本
+      description: 输出 `dsh --version`
+      placeholder: 0.2.1-rc.3
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: 系统
+      description: Windows 版本 / 是否 WSL
+      placeholder: Windows 11 23H2
+    validations:
+      required: true
+  - type: input
+    id: profile
+    attributes:
+      label: profile 名
+      description: 启动器设置里的 profileName
+      placeholder: pack-test-2
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: 报错原文
+      description: 安装命令的完整输出，别只贴一行
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 你做了什么
+      description: 从哪一步开始不对
+    validations:
+      required: false
