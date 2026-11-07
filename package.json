@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-local-kb",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "description": "本地知识库插件（MVP）：kb_consult / kb_index / kb_stage；库逻辑与面板网页打包在 lib，写只写收件箱。",
   "type": "module",
   "main": "index.mjs",
@@ -22,6 +22,7 @@
     }
   }
 }
+
 
 
 

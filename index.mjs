@@ -235,10 +235,11 @@ export function createRecommendTool({ home, code }) {
           payload: { id: args.id },
           reason: args.reason,
         })
-        if (result.status === 'pending') return { text: `已放进「待拍板」#${result.seq}，等用户一票决定：${args.reason}` }
-        if (result.status === 'skipped') return { text: `这次没提成：${result.reason}` }
+        const warn = result.warnings?.length ? `\n提示（不影响提交，由人判断）：${result.warnings.join('；')}` : ''
+        if (result.status === 'pending') return { text: `已放进「待拍板」#${result.seq}，等用户一票决定：${args.reason}${warn}` }
+        if (result.status === 'skipped') return { text: `这次没提成：${result.reason}${warn}` }
         if (result.status === 'off') return { text: `经验生成已关闭：${result.reason}` }
-        return { text: `已提交（${result.status}）` }
+        return { text: `已提交（${result.status}）${warn}` }
       } finally {
         db.close()
       }
