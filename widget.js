@@ -162,7 +162,7 @@
       .then((payload) => {
         if (!payload?.ok) throw new Error(payload?.error ?? '面板没起来')
         panelBase = String(payload.url ?? BASE).replace(/\/$/, '')
-        body.innerHTML = `<iframe class="dsh-kb-frame" src="${panelBase}/?embed=1" title="本地知识库"></iframe>`
+        body.innerHTML = `<iframe class="dsh-kb-frame" src="${panelBase}/?embed=1" allow="clipboard-write" title="本地知识库"></iframe>`
         refreshChips()
       })
       .catch((error) => {
