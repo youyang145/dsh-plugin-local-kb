@@ -1,7 +1,7 @@
 /**
  * dsh-plugin-local-kb —— 本地知识库插件（MVP）
  *
- * 给模型三个工具：kb_consult / kb_index / kb_stage。
+ * 给模型六个工具：kb_consult / kb_index / kb_read / kb_stage / kb_record / kb_recommend。
  * 库逻辑打包在 lib/kb 里，插件不依赖外部路径；home 仍指向本机知识库目录。
  *
  * 设计约束：
@@ -105,6 +105,50 @@ export function createIndexTool({ home, code }) {
       }
     },
     presentCall: () => ({ card: 'generic', title: '看知识库目录', kind: 'other', rawInput: {} }),
+  }
+}
+
+/**
+ * kb_read：按 id 读正文，最多 3 条。三级读取的第三级。
+ */
+export function createReadTool({ home, code }) {
+  const load = (file) => import(pathToFileURL(path.join(code, file)).href)
+  return {
+    name: 'kb_read',
+    description: '按 id 读正文（最多 3 条）。kb_consult 给的是标题和简介；要引用细节或下结论时再用它，别一次读很多。',
+    parameters: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        ids: {
+          type: 'array',
+          items: { type: 'string' },
+          minItems: 1,
+          maxItems: 3,
+          description: '要读的块 id，最多 3 个',
+        },
+      },
+      required: ['ids'],
+    },
+    output: {
+      schema: { type: 'object', additionalProperties: false, properties: { text: { type: 'string' } }, required: ['text'] },
+      render: (_args, value) => [{ type: 'text', text: value.text }],
+    },
+    async execute(args) {
+      const ids = Array.isArray(args?.ids) ? args.ids.map((x) => String(x)).slice(0, 3) : []
+      const [{ openDb }, { layout }, { readBodies }] = await Promise.all([
+        load('db.mjs'), load('config.mjs'), load('consult.mjs'),
+      ])
+      const db = openDb(layout(home).db)
+      try {
+        const rows = readBodies(db, ids, { max: 3 })
+        if (!rows.length) return { text: '没找到这些 id 的正文，先用 kb_consult 确认 id。' }
+        return { text: rows.map((row) => `# ${row.title}\n分区：${row.domain}\nid：${row.id}\n\n${row.body}`).join('\n\n---\n\n') }
+      } finally {
+        db.close()
+      }
+    },
+    presentCall: (args) => ({ card: 'generic', title: `读正文：${(args.ids ?? []).join(', ')}`, kind: 'other', rawInput: args }),
   }
 }
 
@@ -352,6 +396,7 @@ export function apply(ctx, config = {}) {
   }
   ctx.tools.register(createTool(options))
   ctx.tools.register(createIndexTool(options))
+  ctx.tools.register(createReadTool(options))
   ctx.tools.register(createStageTool(options))
   ctx.tools.register(createRecordTool(options))
   ctx.tools.register(createRecommendTool(options))
@@ -400,7 +445,8 @@ function mountAutoIndex(ctx, { home, code }) {
               ? {
                   at: now,
                   text: [
-                    '【本地经验库】先看索引，需要细节 / 反例 / 经验账本时调用 kb_consult，不要凭记忆编；闲聊不用查。',
+                    '【本地经验库】每轮自动带索引（L1）；需要细节先 kb_consult（L2：标题+简介），要引用正文再用 kb_read(ids)（L3，最多 3 条）。闲聊不用查，不要凭记忆编。',
+                    '分区是两级「分区/主题」；MCP 写入只进「待分区」收件箱，主库由人拍板。',
                     summary,
                   ].join('\n'),
                 }
@@ -428,3 +474,4 @@ function mountAutoIndex(ctx, { home, code }) {
     console.warn('[local-kb] systemPrompt 不可用，跳过自动索引：' + String(error?.message ?? error))
   }
 }
+
