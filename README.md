@@ -8,7 +8,7 @@
 
 | 能力 | 说明 |
 |---|---|
-| 5 个工具 | `kb_consult` / `kb_index` / `kb_stage` / `kb_record` / `kb_recommend` |
+| 6 个工具 | `kb_consult` / `kb_index` / `kb_read` / `kb_stage` / `kb_record` / `kb_recommend` |
 | 每轮索引 | `systemPrompt.section` 注入分区目录与召回规则，压缩不会盖掉 |
 | 右下角挂件 | K 按钮 → 可拖动/缩放的面板小窗；待拍板入口 |
 | 面板服务 | 懒启动 7788，不随 DSH 启动占端口 |
@@ -20,6 +20,7 @@
 |---|---|---|
 | `kb_consult` | 先判要不要查（闲聊跳过），返回索引摘要 + 命中简介 + 反例警示 | 不写 |
 | `kb_index` | 只看分区目录 | 不写 |
+| `kb_read` | 按 id 读正文，最多 3 条 | 不写 |
 | `kb_stage` | 材料分块放进「待分区」收件箱，最多 5 块 | 只写收件箱 |
 | `kb_record` | 套用/复现记账（used / succeeded / occurrences） | 只改计数 |
 | `kb_recommend` | 建议转正/推翻，必须带理由 | 只进「待拍板」，人决定 |
@@ -59,7 +60,7 @@ dsh plugin --profile <你的 profile> add "<仓库>\dsh-plugin" `
 ## 本地验证
 
 ```bash
-node harness.mjs     # 假 ctx，跑五个工具
+node harness.mjs     # 假 ctx，跑六个工具
 ```
 
 ## 打包
@@ -73,7 +74,7 @@ npm pack             # files 已包含 lib/**、lib/web/**、widget.js
 ## 限制
 
 - 面板仍是独立进程（7788），懒启动；
-- 自动索引只到"目录 + 召回规则"，正文仍要 `kb_consult`；
+- 自动索引只到"目录 + 召回规则"，正文要用 `kb_read` 按需读；
 - 主库写入只由人在面板操作，工具没有直接写主库的权限。
 
 ## 许可
