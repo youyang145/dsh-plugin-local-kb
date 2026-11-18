@@ -160,7 +160,7 @@ export function createStageTool({ home, code }) {
   const load = (file) => import(pathToFileURL(path.join(code, file)).href)
   return {
     name: 'kb_stage',
-    description: '把一段材料分块后放进知识库的「待分区」收件箱，并给每块附上候选分区。只能进收件箱，不会写主库；一次最多 5 块。',
+    description: '把知识材料分块后放进「待分区」收件箱，并给每块附候选分区。只能进收件箱，不会写主库；一次最多 5 块。经验不要走这里。',
     parameters: {
       type: 'object',
       additionalProperties: false,
@@ -474,4 +474,5 @@ function mountAutoIndex(ctx, { home, code }) {
     console.warn('[local-kb] systemPrompt 不可用，跳过自动索引：' + String(error?.message ?? error))
   }
 }
+
 
