@@ -8,11 +8,11 @@
 
 | 能力 | 说明 |
 |---|---|
-| 6 个工具 | `kb_consult` / `kb_index` / `kb_read` / `kb_stage` / `kb_record` / `kb_recommend` |
+| 7 个工具 | `kb_consult` / `kb_deep` / `kb_index` / `kb_read` / `kb_stage` / `kb_record` / `kb_recommend` |
 | 每轮索引 | `systemPrompt.section` 注入分区目录与召回规则，压缩不会盖掉 |
 | 右下角挂件 | K 按钮 → 可拖动/缩放的面板小窗；待拍板入口 |
 | 面板服务 | 懒启动 7788，不随 DSH 启动占端口 |
-| MCP | 面板里的开关，`POST /mcp`，五个工具 + 连接编号 + 留痕 |
+| MCP | 面板里的开关，`POST /mcp`，六个工具 + 连接编号 + 留痕 |
 
 ## 工具边界
 
@@ -81,7 +81,7 @@ DSH 官方目前只发布 rc（最新 `0.2.2-rc.5`），没有稳定版。升级
 ## 本地验证
 
 ```bash
-node harness.mjs     # 假 ctx，跑六个工具
+node harness.mjs     # 假 ctx，跑七个工具
 ```
 
 ## 打包

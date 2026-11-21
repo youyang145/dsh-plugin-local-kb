@@ -88,6 +88,60 @@ export function createTool({ home, code }) {
   }
 }
 
+/** kb_deep：文件级深扫，索引查不到或找附件/文件时用；默认不调用。 */
+export function createDeepTool({ home, code }) {
+  const load = (file) => import(pathToFileURL(path.join(code, file)).href)
+  return {
+    name: 'kb_deep',
+    description: '文件级深扫：索引查不到、或要找附件/文件时用。四方向互助补全扫 blocks 目录，比 kb_consult 慢；返回覆盖率与完整性，默认不用。',
+    parameters: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        query: { type: 'string', description: '要找的关键词或文件线索' },
+        limit: { type: 'integer', description: '最多返回几条，默认 5' },
+        complete: { type: 'boolean', description: 'true=扫完再返回；false=按预算提前停（默认 false）' },
+      },
+      required: ['query'],
+    },
+    output: {
+      schema: {
+        type: 'object',
+        additionalProperties: false,
+        properties: { text: { type: 'string' } },
+        required: ['text'],
+      },
+      render: (_args, value) => [{ type: 'text', text: value.text }],
+    },
+    async execute(args) {
+      const [{ openDb }, { layout }, { search }] = await Promise.all([
+        load('db.mjs'),
+        load('config.mjs'),
+        load('search.mjs'),
+      ])
+      const db = openDb(layout(home).db)
+      try {
+        const result = await search(db, args.query, {
+          home,
+          mode: 'deep',
+          profile: args.complete ? 'complete' : 'balanced',
+          limit: args.limit ?? 5,
+        })
+        if (!result.rows.length) return { text: wrapData('深扫没有命中。') }
+        const lines = [`深扫命中 ${result.rows.length} 条｜覆盖 ${(result.coverage * 100).toFixed(1)}%｜${result.complete ? '完整' : '未扫完（预算到）'}`]
+        for (const row of result.rows) {
+          lines.push(`- ${row.id}｜${row.domain || '—'}｜${row.title}`)
+          if (row.summary) lines.push(`  ${row.summary}`)
+        }
+        return { text: wrapData(lines.join('\n')) }
+      } finally {
+        db.close()
+      }
+    },
+    presentCall: (args) => ({ card: 'generic', title: `深扫：${args.query}`, kind: 'other', rawInput: args }),
+  }
+}
+
 /** kb_index：只返回分区目录，不检索、不读书。 */
 export function createIndexTool({ home, code }) {
   const load = (file) => import(pathToFileURL(path.join(code, file)).href)
@@ -401,6 +455,7 @@ export function apply(ctx, config = {}) {
     code: config.code ?? DEFAULT_CODE,
   }
   ctx.tools.register(createTool(options))
+  ctx.tools.register(createDeepTool(options))
   ctx.tools.register(createIndexTool(options))
   ctx.tools.register(createReadTool(options))
   ctx.tools.register(createStageTool(options))
