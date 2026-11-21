@@ -57,16 +57,25 @@ dsh plugin --profile <你的 profile> add "<仓库>\dsh-plugin" `
         home: 'D:\kb\local-experience-kb'
 ```
 
-## 兼容性
+## 运行环境（已验证 / 未验证）
 
-| DSH 版本 | 状态 |
+| 项 | 要求 / 状态 |
 |---|---|
-| `0.2.1-rc.3` | **运行实测**：6 个工具、每轮索引、挂件、面板、MCP |
-| `0.2.2-rc.5` | 类型核对通过（`tools.register`、`systemPrompt.section`、`webServer.tapIndex` 签名未变）；未做运行验证 |
+| DSH | `0.2.1-rc.3` **运行实测**；`0.2.2-rc.5` 仅类型核对 |
+| Node | 插件 `>=22.5.0`（依赖内置 `node:sqlite`）；DSH `0.2.2` 自带 `>=24.9` |
+| 操作系统 | Windows x64 **实测**；Linux / macOS 未验证 |
+| 安装方式 | 本地目录安装实测；GitHub 地址安装未验证 |
+| 验证日期 | 2026-11-21 |
 
-Node：插件要求 `>=22`；DSH `0.2.2` 的运行时要求 `>=24.9`，随 DSH 自带，不冲突。
+DSH 官方目前只发布 rc（最新 `0.2.2-rc.5`），没有稳定版。升级后按顺序验证：
 
-升级 DSH 后按这个顺序验：`dump-config` 有 `id: local-kb` → 工具列表 6 个 → 右下角 K 挂件 → 面板能开 → 索引注入有内容。异常时回退 DSH 版本。
+1. `dump-config` 出现 `id: local-kb`；
+2. 工具列表 6 个；
+3. 右下角 K 挂件；
+4. 面板能打开；
+5. 索引注入有内容。
+
+任一步失败就回退到 `0.2.1-rc.3`。
 
 ## 本地验证
 

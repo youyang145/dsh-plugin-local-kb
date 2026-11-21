@@ -2,6 +2,17 @@
 
 这份是给"另一个 AI"看的：你把下面这段丢给它，它照着做就行。
 
+## 环境要求
+
+| 项 | 要求 / 状态 |
+|---|---|
+| DSH | `0.2.x`；`0.2.1-rc.3` 运行实测，`0.2.2-rc.5` 仅类型核对 |
+| Node | `>=22.5.0`（插件依赖 `node:sqlite`） |
+| 操作系统 | Windows x64 实测；Linux / macOS 未验证 |
+| 安装方式 | 本地目录安装实测；GitHub 地址安装未验证 |
+
+DSH 官方当前只发布 rc，没有稳定版。
+
 ## 一段可以直接转发的话
 
 > 请在 Windows 上帮我安装一个 DeepSeek Harness 插件：
@@ -21,7 +32,7 @@
 
 - Windows；
 - DSH 已安装（启动器能起来）；
-- Node 22+；
+- Node 22.5+；
 - 一个能写的 pnpm store 目录。
 
 ### 2. 找 profile
@@ -39,7 +50,14 @@ dsh plugin --profile <你的 profile> add "https://github.com/youyang145/dsh-plu
   --store-dir "F:\一个可写目录\pnpm-store"
 ```
 
-`--store-dir` 不是必须，但如果报 `EPERM` 或 store 相关错误，加上它。`n`n如果从 git 安装失败（网络、代理、证书），退回本地目录：`n`n```powershell`ngit clone https://github.com/youyang145/dsh-plugin-local-kb.git`ndsh plugin --profile <你的 profile> add "<clone 下来的目录>" --ignore-workspace-root-check`n```
+`--store-dir` 不是必须，但如果报 `EPERM` 或 store 相关错误，加上它。
+
+如果从 git 安装失败（网络、代理、证书），退回本地目录：
+
+```powershell
+git clone https://github.com/youyang145/dsh-plugin-local-kb.git
+dsh plugin --profile <你的 profile> add "<clone 下来的目录>" --ignore-workspace-root-check
+```
 
 ### 4. 检查两处
 
