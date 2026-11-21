@@ -1,11 +1,11 @@
 {
   "name": "dsh-plugin-local-kb",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "description": "DeepSeek Harness 适配器：7 个工具（含 kb_deep）、每轮索引注入、右下角挂件、MCP 与配对授权；库逻辑打包在 lib。",
   "type": "module",
   "main": "index.mjs",
   "engines": {
-    "node": ">=22.5.0"
+    "node": ">=22.13.0"
   },
   "files": [
     "index.mjs",
@@ -22,6 +22,7 @@
     }
   }
 }
+
 
 
 

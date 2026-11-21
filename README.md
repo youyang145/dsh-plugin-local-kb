@@ -63,7 +63,7 @@ dsh plugin --profile <你的 profile> add "<仓库>\dsh-plugin" `
 | 项 | 要求 / 状态 |
 |---|---|
 | DSH | `0.2.1-rc.3` **运行实测**；`0.2.2-rc.5` 仅类型核对 |
-| Node | 插件 `>=22.5.0`（依赖内置 `node:sqlite`）；DSH `0.2.2` 自带 `>=24.9` |
+| Node | 插件 `>=22.13.0`（依赖内置 `node:sqlite`）；DSH `0.2.2` 自带 `>=24.9` |
 | 操作系统 | Windows x64 **实测**；Linux / macOS 未验证 |
 | 安装方式 | 本地目录安装实测；GitHub 地址安装未验证 |
 | 验证日期 | 2026-11-21 |
