@@ -55,6 +55,7 @@ dsh plugin --profile <你的 profile> add "<仓库>\dsh-plugin" `
       name: 'dsh-plugin-local-kb'
       config:
         home: 'D:\kb\local-experience-kb'
+        # widget: false   # 可选：不注入右下角挂件，用于排查嵌入冲突
 ```
 
 ## 运行环境（已验证 / 未验证）

@@ -6,6 +6,10 @@
   if (window.__dshKbWidgetLoaded) return
   window.__dshKbWidgetLoaded = true
 
+  // 只允许在顶层页面注入；如果被套进 iframe（面板、预览、代理页），直接退出，
+  // 避免在小窗/预览里再生成一个挂件，或误触发面板启动。
+  if (window.top !== window.self) return
+
   const BASE = 'http://127.0.0.1:7788'
   const POS_KEY = 'dsh-kb-widget-box-v1'
   const SIZE = 44

@@ -411,6 +411,8 @@ export function apply(ctx, config = {}) {
   mountAutoIndex(ctx, { home: options.home, code: options.code })
 
   // Web 服务可能晚于插件就绪：有就等它，没有就只做工具（headless 环境）。
+  // config.widget === false 时完全不注入挂件（用于排查页面被劫持/嵌入冲突）。
+  if (config.widget === false) return
   const panelUrl = config.panelUrl ?? DEFAULT_PANEL
   try {
     if (typeof ctx.inject === 'function') {
