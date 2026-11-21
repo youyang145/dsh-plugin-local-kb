@@ -54,7 +54,7 @@ dsh plugin --profile <你的 profile> add "<仓库>\dsh-plugin" `
     - id: local-kb
       name: 'dsh-plugin-local-kb'
       config:
-        home: 'F:\path\to\kb-data'
+        home: 'C:\Users\<你的用户名>\local-experience-kb'
 ```
 
 ## 本地验证
