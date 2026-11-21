@@ -57,6 +57,17 @@ dsh plugin --profile <你的 profile> add "<仓库>\dsh-plugin" `
         home: 'D:\kb\local-experience-kb'
 ```
 
+## 兼容性
+
+| DSH 版本 | 状态 |
+|---|---|
+| `0.2.1-rc.3` | **运行实测**：6 个工具、每轮索引、挂件、面板、MCP |
+| `0.2.2-rc.5` | 类型核对通过（`tools.register`、`systemPrompt.section`、`webServer.tapIndex` 签名未变）；未做运行验证 |
+
+Node：插件要求 `>=22`；DSH `0.2.2` 的运行时要求 `>=24.9`，随 DSH 自带，不冲突。
+
+升级 DSH 后按这个顺序验：`dump-config` 有 `id: local-kb` → 工具列表 6 个 → 右下角 K 挂件 → 面板能开 → 索引注入有内容。异常时回退 DSH 版本。
+
 ## 本地验证
 
 ```bash
