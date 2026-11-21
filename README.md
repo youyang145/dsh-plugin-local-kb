@@ -54,7 +54,7 @@ dsh plugin --profile <你的 profile> add "<仓库>\dsh-plugin" `
     - id: local-kb
       name: 'dsh-plugin-local-kb'
       config:
-        home: 'C:\Users\<你的用户名>\local-experience-kb'
+        home: 'D:\kb\local-experience-kb'
 ```
 
 ## 本地验证
@@ -80,4 +80,5 @@ npm pack             # files 已包含 lib/**、lib/web/**、widget.js
 ## 许可
 
 代码 Apache-2.0；设计文档与手稿在骨架仓库，CC BY 4.0。
+
 
